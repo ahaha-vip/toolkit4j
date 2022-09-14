@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.chengwei.toolkit4j.cache.CacheAutoConfiguration,\
+  com.chengwei.toolkit4j.lock.LockAutoConfiguration,\
+  com.chengwei.toolkit4j.ratelimit.RateLimitConfiguration

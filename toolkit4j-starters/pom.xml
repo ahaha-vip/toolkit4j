@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>toolkit4j</artifactId>
+        <groupId>com.chengwei</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>toolkit4j-starters</artifactId>
+    <packaging>pom</packaging>
+    <description>中间件快速集成包</description>
+
+    <modules>
+        <module>toolkit4j-blobstore-starter</module>
+        <module>toolkit4j-job-starter</module>
+        <module>toolkit4j-redisson-starter</module>
+        <module>toolkit4j-security-starter</module>
+    </modules>
+
+    <dependencies>
+        <!--公共模块-->
+        <dependency>
+            <groupId>com.chengwei</groupId>
+            <artifactId>toolkit4j-core</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!--spring boot自动化配置-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>
