@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.chengwei.toolkit4j.security.ShiroAutoConfiguration
