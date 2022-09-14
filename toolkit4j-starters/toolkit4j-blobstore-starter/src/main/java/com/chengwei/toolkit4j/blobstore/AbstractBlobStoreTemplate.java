@@ -108,6 +108,7 @@ public abstract class AbstractBlobStoreTemplate implements BlobStoreTemplate {
      * @param blobKey       文件键
      * @param expireMinutes 过期时间（分钟）
      * @return 文件签名地址
+     * @throws Exception 签名发生的异常
      */
     protected abstract String doGeneratePresignedUrl(String blobKey, int expireMinutes) throws Exception;
 

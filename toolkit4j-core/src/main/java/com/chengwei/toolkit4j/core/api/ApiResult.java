@@ -65,7 +65,8 @@ public class ApiResult<DATA> {
     /**
      * 成功响应
      *
-     * @param <T> 响应数据类型泛型
+     * @param data 相应数据
+     * @param <T>  响应数据类型泛型
      * @return 响应体
      */
     public static <T> ApiResult<T> success(T data) {

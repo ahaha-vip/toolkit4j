@@ -16,17 +16,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SpringDocProperties {
 
     /**
-     * host
+     * 域名
      */
     private String host;
 
     /**
-     * port
+     * 端口
      */
     private int port;
 
     /**
-     * contextPath
+     * 上下文路径
      */
     private String contextPath;
 }

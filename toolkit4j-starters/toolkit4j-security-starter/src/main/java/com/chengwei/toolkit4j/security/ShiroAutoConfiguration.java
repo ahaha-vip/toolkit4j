@@ -52,6 +52,7 @@ public class ShiroAutoConfiguration {
      * 常见日志为：xxx is not eligible for getting processed by all BeanPostProcessors(for example: not eligible for auto-proxying)。
      */
     @Bean
+    @SuppressWarnings("all")
     public AbstractShiroFilter shiroFilterFactoryBean(ShiroProperties shiroProperties, SecurityManager securityManager) throws Exception {
         long expireTime = shiroProperties.getExpireTime();
         Assert.isTrue(expireTime >= 30, "令牌过期时间不能低于30分钟");
@@ -77,6 +78,7 @@ public class ShiroAutoConfiguration {
      * @param listeners 由使用者自行实现，监听一些事件
      */
     @Bean
+    @SuppressWarnings("all")
     public SecurityManager securityManager(@Autowired List<Realm> realms, @Autowired List<AuthenticationListener> listeners) {
         // subject存储器
         SubjectDAO subjectDAO = getSubjectDAO();
@@ -139,6 +141,7 @@ public class ShiroAutoConfiguration {
      * 提供基于AOP的授权控制，相关注解{@link org.apache.shiro.authz.annotation}。
      */
     @Bean
+    @SuppressWarnings("all")
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Lazy SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);

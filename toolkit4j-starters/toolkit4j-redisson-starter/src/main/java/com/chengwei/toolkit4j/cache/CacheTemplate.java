@@ -17,6 +17,7 @@ public interface CacheTemplate {
      * @param key   缓存键
      * @param value 缓存值
      * @param <T>   缓存值类型
+     * @return 缓存值
      */
     <T> T set(String key, T value);
 
