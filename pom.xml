@@ -7,7 +7,7 @@
     <groupId>com.chengwei</groupId>
     <artifactId>toolkit4j</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <description>核心模块以及中间件快速集成包</description>
 
     <developers>
