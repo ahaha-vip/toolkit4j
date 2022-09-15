@@ -66,7 +66,7 @@ public abstract class ShiroConstants {
      * @return 缓存键
      */
     public static String getUserMappingTokenCacheKey(String applicationName, LoginPlatform loginPlatform, String userId) {
-        return StrUtil.format("{}:userMappingToken:{}:{}", applicationName, loginPlatform.getType(), userId);
+        return StrUtil.format("{}:userMappingToken-v1:{}:{}", applicationName, loginPlatform.getType(), userId);
     }
 
     /**
