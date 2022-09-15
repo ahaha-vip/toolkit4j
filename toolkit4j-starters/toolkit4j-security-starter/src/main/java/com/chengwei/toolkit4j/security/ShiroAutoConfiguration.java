@@ -6,7 +6,6 @@ import cn.hutool.core.map.MapUtil;
 import com.chengwei.toolkit4j.security.auth.AuthenticationEventHandler;
 import com.chengwei.toolkit4j.security.auth.AuthenticationTokenFilter;
 import com.chengwei.toolkit4j.security.auth.ModularAuthenticationStrategy;
-import lombok.RequiredArgsConstructor;
 import org.apache.shiro.authc.AuthenticationListener;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
@@ -45,7 +44,6 @@ import java.util.concurrent.Executor;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(ShiroProperties.class)
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ShiroAutoConfiguration {
 
     /**
@@ -53,9 +51,13 @@ public class ShiroAutoConfiguration {
      * 1.不将ShiroFilterFactoryBean注入IOC容器，修改为直接创建SpringShiroFilter并注入IOC。
      * 2.原因为ShiroFilterFactoryBean实现了BeanPostProcessor接口，初始化较早，导致它所依赖的所有Bean都得提前初始化，因此这些Bean都不能进行一些后置的处理，比如AOP代理等。
      * 常见日志为：xxx is not eligible for getting processed by all BeanPostProcessors(for example: not eligible for auto-proxying)。
+     *
+     * @param shiroProperties shiro配置
+     * @param securityManager 安全管理器
+     * @return 过滤器
+     * @throws Exception 初始化异常时抛出
      */
     @Bean
-    @SuppressWarnings("all")
     public AbstractShiroFilter shiroFilterFactoryBean(ShiroProperties shiroProperties, SecurityManager securityManager) throws Exception {
         long expireTime = shiroProperties.getExpireTime();
         Assert.isTrue(expireTime >= 30, "令牌过期时间不能低于30分钟");
@@ -79,9 +81,9 @@ public class ShiroAutoConfiguration {
      *
      * @param realms    由使用者自行实现，专注于认证和授权
      * @param listeners 由使用者自行实现，监听一些事件
+     * @return 安全管理器
      */
     @Bean
-    @SuppressWarnings("all")
     public SecurityManager securityManager(@Autowired List<Realm> realms, @Autowired List<AuthenticationListener> listeners) {
         // subject存储器
         SubjectDAO subjectDAO = getSubjectDAO();
@@ -156,9 +158,11 @@ public class ShiroAutoConfiguration {
 
     /**
      * 提供基于AOP的授权控制，相关注解{@link org.apache.shiro.authz.annotation}。
+     *
+     * @param securityManager 安全管理器
+     * @return 认证授权切面
      */
     @Bean
-    @SuppressWarnings("all")
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(@Lazy SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
         advisor.setSecurityManager(securityManager);
