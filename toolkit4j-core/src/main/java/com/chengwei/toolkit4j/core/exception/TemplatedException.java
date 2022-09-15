@@ -50,9 +50,11 @@ public abstract class TemplatedException extends RuntimeException {
     /**
      * 提供一个异常对象的全参构造器
      *
-     * @param message 消息模板，使用{}占位
-     * @param cause   触发此异常的缘由异常
-     * @param args    参数
+     * @param cause              触发此异常的缘由异常
+     * @param enableSuppression  whether suppression is enabled or disabled
+     * @param writableStackTrace whether the stack trace should be writable
+     * @param message            消息模板，使用{}占位
+     * @param args               参数
      */
     public TemplatedException(Throwable cause, boolean enableSuppression, boolean writableStackTrace, String message, Object... args) {
         super(message == null ? null : StrUtil.format(message, args), cause, enableSuppression, writableStackTrace);
