@@ -3,6 +3,7 @@ package com.chengwei.toolkit4j.security;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
+import com.chengwei.toolkit4j.security.auth.AuthenticationEventHandler;
 import com.chengwei.toolkit4j.security.auth.AuthenticationTokenFilter;
 import com.chengwei.toolkit4j.security.auth.ModularAuthenticationStrategy;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +33,7 @@ import javax.servlet.Filter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executor;
 
 
 /**
@@ -94,6 +97,20 @@ public class ShiroAutoConfiguration {
         securityManager.setSubjectDAO(subjectDAO);
         securityManager.setRealms(CollUtil.defaultIfEmpty(realms, CollUtil.newArrayList(new SimpleAccountRealm())));
         return securityManager;
+    }
+
+    /**
+     * 自定义认证监听器
+     *
+     * @param executor 线程池
+     * @param handlers 事件处理器
+     * @return 监听器
+     */
+    @Bean
+    public AuthenticationListener authenticationListener(
+            @Autowired(required = false) @Qualifier(ShiroConstants.AUTHENTICATION_EVENT_HANDLER_THREAD_POOL) Executor executor,
+            @Autowired(required = false) List<AuthenticationEventHandler> handlers) {
+        return new com.chengwei.toolkit4j.security.auth.AuthenticationListener(executor, handlers);
     }
 
     /**

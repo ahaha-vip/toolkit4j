@@ -1,7 +1,6 @@
 package com.chengwei.toolkit4j.security.auth;
 
 import com.chengwei.toolkit4j.security.ShiroAutoConfiguration;
-import com.chengwei.toolkit4j.security.ShiroConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AbstractAuthenticator;
 import org.apache.shiro.authc.AuthenticationException;
@@ -9,9 +8,6 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -25,7 +21,6 @@ import java.util.concurrent.Executor;
  * @since 2021/12/23
  */
 @Slf4j
-@Component
 public class AuthenticationListener implements org.apache.shiro.authc.AuthenticationListener {
 
     /**
@@ -33,8 +28,7 @@ public class AuthenticationListener implements org.apache.shiro.authc.Authentica
      */
     private final AuthenticationEventHandler authenticationEventHandler;
 
-    public AuthenticationListener(@Autowired(required = false) @Qualifier(ShiroConstants.AUTHENTICATION_EVENT_HANDLER_THREAD_POOL) Executor executor,
-                                  @Autowired(required = false) List<AuthenticationEventHandler> handlers) {
+    public AuthenticationListener(Executor executor, List<AuthenticationEventHandler> handlers) {
         this.authenticationEventHandler = new CompositeAuthenticationEventHandler(executor, handlers);
     }
 
