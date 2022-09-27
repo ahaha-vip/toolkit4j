@@ -1,5 +1,6 @@
 package com.chengwei.toolkit4j.core.api;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +19,12 @@ import javax.validation.constraints.Min;
 public class PageRequest {
 
     @Min(value = 1, message = "页码必须为正数")
+    @Parameter(description = "页码")
     @Schema(description = "页码", defaultValue = "1")
     private int pageNum = 1;
 
     @Min(value = 1, message = "每页大小必须为正数")
+    @Parameter(description = "每页大小")
     @Schema(description = "每页大小", defaultValue = "10")
     private int pageSize = 10;
 }

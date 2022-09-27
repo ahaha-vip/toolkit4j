@@ -1,6 +1,7 @@
 package com.chengwei.toolkit4j.core.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,19 +21,23 @@ import java.util.Date;
 @Schema(description = "偏移量参数")
 public class OffsetRequest {
 
+    @Parameter(description = "偏移值")
     @Schema(description = "偏移值")
     private String offsetValue;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Parameter(description = "偏移时间，格式：yyyy-MM-dd HH:mm:ss")
     @Schema(description = "偏移时间，格式：yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date offsetTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @Parameter(description = "偏移日期，格式：yyyy-MM-dd")
     @Schema(description = "偏移日期，格式：yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date offsetDate;
 
     @Min(value = 1, message = "每页大小必须为正数")
     @Max(value = 50, message = "每页大小不能超过50条")
+    @Parameter(description = "每页大小")
     @Schema(description = "每页大小", defaultValue = "10")
     private int pageSize = 10;
 }
