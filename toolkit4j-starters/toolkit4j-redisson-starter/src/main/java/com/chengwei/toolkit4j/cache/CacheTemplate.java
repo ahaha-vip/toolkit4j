@@ -98,10 +98,43 @@ public interface CacheTemplate {
     void expire(String key, long expireTime, TimeUnit timeUnit);
 
     /**
-     * 根据缓存键生成一个自增id
+     * 先获取值，然后自增，即 return i++;
      *
      * @param key 缓存键
-     * @return 自增id
+     * @return 值
      */
-    long incrementId(String key);
+    long getAndIncrement(String key);
+
+    /**
+     * 先获取值，然后自减，即 return i--;
+     *
+     * @param key 缓存键
+     * @return 值
+     */
+    long getAndDecrement(String key);
+
+    /**
+     * 先自增，然后获取值，即 return ++i;
+     *
+     * @param key 缓存键
+     * @return 值
+     */
+    long incrementAndGet(String key);
+
+    /**
+     * 先自减，然后获取值，即 return --i;
+     *
+     * @param key 缓存键
+     * @return 值
+     */
+    long decrementAndGet(String key);
+
+    /**
+     * 先相加，然后获取值，即 return i + delta;
+     *
+     * @param key   缓存键
+     * @param delta 增加值
+     * @return 值
+     */
+    long addAndGet(String key, long delta);
 }

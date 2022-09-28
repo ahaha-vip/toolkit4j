@@ -112,8 +112,32 @@ public class RedissonCacheTemplate implements CacheTemplate {
     }
 
     @Override
-    public long incrementId(String key) {
+    public long getAndIncrement(String key) {
         Assert.notEmpty(key, "缓存键不能为空");
         return redissonClient.getAtomicLong(key).getAndIncrement();
+    }
+
+    @Override
+    public long getAndDecrement(String key) {
+        Assert.notEmpty(key, "缓存键不能为空");
+        return redissonClient.getAtomicLong(key).getAndDecrement();
+    }
+
+    @Override
+    public long incrementAndGet(String key) {
+        Assert.notEmpty(key, "缓存键不能为空");
+        return redissonClient.getAtomicLong(key).incrementAndGet();
+    }
+
+    @Override
+    public long decrementAndGet(String key) {
+        Assert.notEmpty(key, "缓存键不能为空");
+        return redissonClient.getAtomicLong(key).decrementAndGet();
+    }
+
+    @Override
+    public long addAndGet(String key, long delta) {
+        Assert.notEmpty(key, "缓存键不能为空");
+        return redissonClient.getAtomicLong(key).addAndGet(delta);
     }
 }
