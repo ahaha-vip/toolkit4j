@@ -32,4 +32,23 @@ public class OffsetResponse<T> {
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @Schema(description = "查询下一页数据时的偏移日期，格式：yyyy-MM-dd")
     private Date offsetDate;
+
+    public OffsetResponse<T> setList(List<T> list) {
+        this.list = list;
+        return this;
+    }
+
+    /**
+     * 设置偏移参数
+     *
+     * @param condition 判断条件，如果还有下一页才设置偏移参数
+     * @param function  执行回调函数设置偏移参数
+     * @return this
+     */
+    public OffsetResponse<T> setOffset(boolean condition, Runnable function) {
+        if (condition) {
+            function.run();
+        }
+        return this;
+    }
 }
