@@ -22,14 +22,14 @@ public class OffsetResponse<T> {
     @Schema(description = "数据列表")
     private List<T> list;
 
-    @Schema(description = "偏移值，最后一条数据的偏移值。")
+    @Schema(description = "查询下一页数据时的偏移值")
     private String offsetValue;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @Schema(description = "偏移时间，格式：yyyy-MM-dd HH:mm:ss，最后一条数据的偏移时间。")
+    @Schema(description = "查询下一页数据时的偏移时间，格式：yyyy-MM-dd HH:mm:ss")
     private Date offsetTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    @Schema(description = "偏移日期，格式：yyyy-MM-dd，最后一条数据的偏移日期。")
+    @Schema(description = "查询下一页数据时的偏移日期，格式：yyyy-MM-dd")
     private Date offsetDate;
 }
