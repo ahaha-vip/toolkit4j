@@ -32,10 +32,10 @@
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
 
         <!--依赖库版本-->
-        <hutool.version>5.8.5</hutool.version>
+        <hutool.version>5.8.11</hutool.version>
         <aliyun-oss.version>3.13.0</aliyun-oss.version>
         <minio.version>8.2.1</minio.version>
-        <shiro.version>1.8.0</shiro.version>
+        <shiro.version>1.10.1</shiro.version>
         <mybatis-plus.version>3.4.3</mybatis-plus.version>
         <redisson.version>3.15.6</redisson.version>
         <xxl-job.version>2.3.0</xxl-job.version>
