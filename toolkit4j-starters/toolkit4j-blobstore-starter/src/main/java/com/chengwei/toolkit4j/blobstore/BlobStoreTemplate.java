@@ -51,7 +51,8 @@ public interface BlobStoreTemplate extends InitializingBean, DisposableBean {
     /**
      * 生成一个带有签名的地址用来访问私有读权限的文件，并设置指定的过期时间。
      *
-     * @param blobKey 文件键
+     * @param blobKey       文件键
+     * @param expireMinutes 过期时间（分钟）
      * @return 文件签名地址（blobKey + "?" + presignedStr）
      */
     String generatePresignedUrl(String blobKey, int expireMinutes);
