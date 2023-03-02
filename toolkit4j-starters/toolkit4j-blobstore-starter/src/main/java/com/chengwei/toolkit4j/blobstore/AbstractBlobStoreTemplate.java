@@ -90,12 +90,17 @@ public abstract class AbstractBlobStoreTemplate implements BlobStoreTemplate {
 
     @Override
     public String generatePresignedUrl(String blobKey) {
+        return this.generatePresignedUrl(blobKey, EXPIRE_MINUTES);
+    }
+
+    @Override
+    public String generatePresignedUrl(String blobKey, int expireMinutes) {
         // 参数校验
         Assert.notEmpty(blobKey, () -> new ClientIllegalException("文件键不能为空"));
 
         // 生成文件签名地址
         try {
-            return this.doGeneratePresignedUrl(blobKey, EXPIRE_MINUTES);
+            return this.doGeneratePresignedUrl(blobKey, expireMinutes);
         } catch (Exception e) {
             log.error("生成文件[{}]签名地址失败", blobKey, e);
             throw new BlobStoreException("生成文件签名地址失败");

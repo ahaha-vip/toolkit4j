@@ -41,10 +41,18 @@ public interface BlobStoreTemplate extends InitializingBean, DisposableBean {
     void delete(String blobKey) throws BlobStoreException;
 
     /**
-     * 生成一个带有签名的地址用来访问私有读权限的文件，并设置一定的过期时间。
+     * 生成一个带有签名的地址用来访问私有读权限的文件，并设置默认的过期时间（30分钟）。
      *
      * @param blobKey 文件键
      * @return 文件签名地址（blobKey + "?" + presignedStr）
      */
     String generatePresignedUrl(String blobKey);
+
+    /**
+     * 生成一个带有签名的地址用来访问私有读权限的文件，并设置指定的过期时间。
+     *
+     * @param blobKey 文件键
+     * @return 文件签名地址（blobKey + "?" + presignedStr）
+     */
+    String generatePresignedUrl(String blobKey, int expireMinutes);
 }
