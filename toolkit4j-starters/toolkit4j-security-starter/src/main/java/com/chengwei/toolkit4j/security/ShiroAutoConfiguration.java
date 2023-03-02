@@ -23,6 +23,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,6 +58,7 @@ public class ShiroAutoConfiguration {
      * @return 过滤器
      * @throws Exception 初始化异常时抛出
      */
+    @ConditionalOnProperty(prefix = "shiro", name = "enabled", havingValue = "true")
     @Bean
     public AbstractShiroFilter shiroFilterFactoryBean(ShiroProperties shiroProperties, SecurityManager securityManager) throws Exception {
         long expireTime = shiroProperties.getExpireTime();
@@ -73,7 +75,7 @@ public class ShiroAutoConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setFilters(filters);
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinition.getFilterChainMap());
-        return (AbstractShiroFilter) shiroFilterFactoryBean.getObject();
+        return shiroFilterFactoryBean.getObject();
     }
 
     /**
