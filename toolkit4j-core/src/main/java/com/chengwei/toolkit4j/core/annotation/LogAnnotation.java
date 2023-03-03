@@ -21,9 +21,9 @@ public @interface LogAnnotation {
     boolean logRequestData() default true;
 
     /**
-     * 是否记录响应参数，默认记录。
+     * 是否记录响应参数，默认不记录。
      *
      * @return true-记录；false-不记录
      */
-    boolean logResponseData() default true;
+    boolean logResponseData() default false;
 }
