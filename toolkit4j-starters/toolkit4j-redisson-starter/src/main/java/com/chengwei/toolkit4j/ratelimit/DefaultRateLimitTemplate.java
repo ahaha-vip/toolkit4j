@@ -43,8 +43,8 @@ public class DefaultRateLimitTemplate implements RateLimitTemplate {
         // 参数校验
         Assert.notEmpty(rateLimitKey, () -> new ServerIllegalException("限流键不能为空"));
         Assert.notNull(operation, () -> new ServerIllegalException("限流操作不能为空"));
-        Assert.isTrue(limitTimes > 0, "限流限制次数必须为正数");
-        Assert.isTrue(rateInterval > 0, "限流间隔时间必须为正数");
+        Assert.isTrue(limitTimes > 0, () -> new ServerIllegalException("限流限制次数必须为正数"));
+        Assert.isTrue(rateInterval > 0, () -> new ServerIllegalException("限流间隔时间必须为正数"));
         RateIntervalUnit rateIntervalUnit = convertTimeUnit(rateIntervalTimeUnit);
 
         // 根据限流键获取一个限流对象
