@@ -31,7 +31,17 @@ public enum LoginPlatform {
     /**
      * 支付宝小程序
      */
-    ALIPAY_APPLET("alipay_applet");
+    ALIPAY_APPLET("alipay_applet"),
+
+    /**
+     * 钉钉
+     */
+    DING_TALK("ding_talk"),
+
+    /**
+     * 其他
+     */
+    OTHER("other");
 
     /**
      * 平台类型
