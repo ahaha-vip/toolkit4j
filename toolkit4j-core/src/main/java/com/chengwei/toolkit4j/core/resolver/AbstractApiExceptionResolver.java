@@ -167,9 +167,9 @@ public abstract class AbstractApiExceptionResolver implements ApiExceptionResolv
      * @param throwable 异常
      */
     protected void loggingException(Throwable throwable) {
-        Optional<ClientInfo> clientInfoOptional = ClientInfoHelper.tryGetClientInfo();
-        if (clientInfoOptional.isPresent()) {
-            ClientInfo clientInfo = clientInfoOptional.get();
+        Optional<ClientInfo> optional = ClientInfoHelper.tryGetClientInfo();
+        if (optional.isPresent()) {
+            ClientInfo clientInfo = optional.get();
             log.error("异常类型：{}。异常信息：{}。客户端信息：{}。", throwable.getClass(), throwable.getMessage(), JSONUtil.toJsonStr(clientInfo));
         } else {
             log.error("异常类型：{}。异常信息：{}。", throwable.getClass(), throwable.getMessage());

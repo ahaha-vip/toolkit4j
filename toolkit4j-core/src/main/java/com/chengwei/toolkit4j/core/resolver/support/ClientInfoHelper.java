@@ -27,35 +27,21 @@ public class ClientInfoHelper {
         try {
             // 尝试从线程上下文获取请求对象
             ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            HttpServletRequest request = Optional.ofNullable(requestAttributes).map(ServletRequestAttributes::getRequest).orElseThrow(() -> new IllegalStateException("获取请求失败"));
+            HttpServletRequest request = Optional.ofNullable(requestAttributes)
+                    .map(ServletRequestAttributes::getRequest)
+                    .orElseThrow(() -> new IllegalStateException("获取请求失败"));
 
             // 解析客户端信息
             String requestPath = getRequestPath(request);
             String httpMethod = request.getMethod();
             String clientIp = ServletUtil.getClientIP(request);
-            ClientInfo clientInfo = ClientInfo.builder().requestPath(requestPath).httpMethod(httpMethod).clientIp(clientIp).build();
+            ClientInfo clientInfo = ClientInfo.builder()
+                    .requestPath(requestPath)
+                    .httpMethod(httpMethod)
+                    .clientIp(clientIp)
+                    .build();
+            tryFillingLoginInfo(clientInfo);
             return Optional.of(clientInfo);
-        } catch (Exception ignored) {
-            return Optional.empty();
-        }
-    }
-
-    /**
-     * 尝试获取客户端的登录信息
-     *
-     * @return 登录信息
-     */
-    public static Optional<ClientLoginInfo> tryGetLoginInfo() {
-        try {
-            Subject subject = SecurityUtils.getSubject();
-            boolean authenticated = subject.isAuthenticated();
-            Object principal = null;
-            if (authenticated) {
-                principal = subject.getPrincipal();
-            }
-
-            ClientLoginInfo loginInfo = ClientLoginInfo.builder().authenticated(authenticated).principal(principal).build();
-            return Optional.of(loginInfo);
         } catch (Exception ignored) {
             return Optional.empty();
         }
@@ -76,5 +62,25 @@ public class ClientInfoHelper {
         }
 
         return url;
+    }
+
+    /**
+     * 补充登录信息
+     *
+     * @param clientInfo 客户端信息
+     */
+    private static void tryFillingLoginInfo(ClientInfo clientInfo) {
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            boolean authenticated = subject.isAuthenticated();
+            if (!authenticated) {
+                return;
+            }
+
+            clientInfo.setAuthenticated(true);
+            clientInfo.setLoginPrincipal(subject.getPrincipal());
+        } catch (Exception ignored) {
+            // noop
+        }
     }
 }

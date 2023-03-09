@@ -30,4 +30,14 @@ public class ClientInfo {
      * 客户端IP
      */
     private String clientIp;
+
+    /**
+     * 是否认证通过
+     */
+    private boolean authenticated;
+
+    /**
+     * 登录信息
+     */
+    private Object loginPrincipal;
 }
