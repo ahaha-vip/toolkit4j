@@ -39,5 +39,5 @@ public class ClientInfo {
     /**
      * 登录信息
      */
-    private Object loginPrincipal;
+    private String loginPrincipal;
 }

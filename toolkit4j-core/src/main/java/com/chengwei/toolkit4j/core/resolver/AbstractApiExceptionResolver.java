@@ -1,6 +1,7 @@
 package com.chengwei.toolkit4j.core.resolver;
 
 import cn.hutool.core.lang.Assert;
+import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.json.JSONUtil;
@@ -170,9 +171,14 @@ public abstract class AbstractApiExceptionResolver implements ApiExceptionResolv
         Optional<ClientInfo> optional = ClientInfoHelper.tryGetClientInfo();
         if (optional.isPresent()) {
             ClientInfo clientInfo = optional.get();
-            log.error("异常类型：{}。异常信息：{}。客户端信息：{}。", throwable.getClass(), throwable.getMessage(), JSONUtil.toJsonStr(clientInfo));
+            log.error("异常类型：{}。异常信息：{}。客户端信息：{}。",
+                    ClassUtil.getClassName(throwable, true),
+                    throwable.getMessage(),
+                    JSONUtil.toJsonStr(clientInfo));
         } else {
-            log.error("异常类型：{}。异常信息：{}。", throwable.getClass(), throwable.getMessage());
+            log.error("异常类型：{}。异常信息：{}。",
+                    ClassUtil.getClassName(throwable, true),
+                    throwable.getMessage());
         }
     }
 }

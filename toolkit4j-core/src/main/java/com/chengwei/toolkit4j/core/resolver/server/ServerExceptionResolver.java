@@ -1,5 +1,6 @@
 package com.chengwei.toolkit4j.core.resolver.server;
 
+import cn.hutool.core.util.ClassUtil;
 import cn.hutool.json.JSONUtil;
 import com.chengwei.toolkit4j.core.exception.ServerException;
 import com.chengwei.toolkit4j.core.exception.server.ServerIllegalException;
@@ -55,9 +56,16 @@ public abstract class ServerExceptionResolver extends AbstractApiExceptionResolv
         Optional<ClientInfo> clientInfoOptional = ClientInfoHelper.tryGetClientInfo();
         if (clientInfoOptional.isPresent()) {
             ClientInfo clientInfo = clientInfoOptional.get();
-            log.error("服务端异常：{}。异常信息：{}。客户端信息：{}。", throwable.getClass(), throwable.getMessage(), JSONUtil.toJsonStr(clientInfo), throwable);
+            log.error("服务端异常：{}。异常信息：{}。客户端信息：{}。",
+                    ClassUtil.getClassName(throwable, true),
+                    throwable.getMessage(),
+                    JSONUtil.toJsonStr(clientInfo),
+                    throwable);
         } else {
-            log.error("服务端异常：{}。异常信息：{}。", throwable.getClass(), throwable.getMessage(), throwable);
+            log.error("服务端异常：{}。异常信息：{}。",
+                    ClassUtil.getClassName(throwable, true),
+                    throwable.getMessage(),
+                    throwable);
         }
     }
 }

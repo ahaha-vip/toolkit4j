@@ -1,5 +1,6 @@
 package com.chengwei.toolkit4j.security;
 
+import cn.hutool.core.util.StrUtil;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,5 +43,10 @@ public abstract class BaseUserLoginPrincipal implements LoginPrincipal {
     @Override
     public PrincipalType getPrincipalType() {
         return PrincipalType.USER;
+    }
+
+    @Override
+    public String toString() {
+        return StrUtil.format("PrincipalType：{}，PrincipalId：{}", this.getPrincipalType(), this.getPrincipalId());
     }
 }

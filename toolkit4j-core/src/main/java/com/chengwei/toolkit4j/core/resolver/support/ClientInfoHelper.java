@@ -78,7 +78,7 @@ public class ClientInfoHelper {
             }
 
             clientInfo.setAuthenticated(true);
-            clientInfo.setLoginPrincipal(subject.getPrincipal());
+            clientInfo.setLoginPrincipal(subject.getPrincipal().toString());
         } catch (Exception ignored) {
             // noop
         }
