@@ -47,6 +47,6 @@ public abstract class BaseUserLoginPrincipal implements LoginPrincipal {
 
     @Override
     public String toString() {
-        return StrUtil.format("PrincipalType：{}，PrincipalId：{}", this.getPrincipalType(), this.getPrincipalId());
+        return StrUtil.format("loginPlatform：{}，userId：{}", this.loginPlatform, this.userId);
     }
 }
